@@ -1,5 +1,5 @@
 {
-  "name": "openbase-react-ui",
+  "name": "openbase-ui",
   "version": "1.2.8",
   "description": "Shared components between Openbase CLI React app and Openbase Cloud React app",
   "type": "module",
@@ -17,8 +17,9 @@
   ],
   "scripts": {
     "barrels": "barrelsby src --location all --delete --exclude index.ts",
-    "build": "npm run barrels && tsc && tsc-alias",
-    "dev": "concurrently \"barrelsby src --location all --delete --exclude index.ts --watch\" \"tsc --watch --preserveWatchOutput --skipLibCheck --noEmitOnError false\" \"tsc-alias --watch\""
+    "build": "barrelsby src --location all --delete --exclude index.ts && tsc && tsc-alias",
+    "barrels:watch": "chokidar \"src/**/*\" -i \"src/**/index.ts\" -i \"src/**/.DS_Store\" -c \"barrelsby src --location all --delete --exclude index.ts\" --initial",
+    "dev": "concurrently \"pnpm run barrels:watch\" \"tsc --watch --preserveWatchOutput --skipLibCheck --noEmitOnError false\" \"tsc-alias --watch\""
   },
   "peerDependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -61,7 +62,7 @@
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.3.0",
-    "openbase-react-shared": "github:openbase-community/react-shared#main",
+    "openbase-drf-api-client": "workspace:*",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
@@ -83,6 +84,7 @@
     "@types/react-dom": "^18.3.1",
     "@types/react-syntax-highlighter": "^15.5.13",
     "barrelsby": "^2.8.1",
+    "chokidar-cli": "^3.0.0",
     "concurrently": "^9.2.1",
     "tsc-alias": "^1.8.10",
     "typescript": "^5.0.0"
@@ -92,6 +94,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openbase-community/openbase-react-ui"
+    "url": "https://github.com/openbase-community/openbase-ui"
   }
 }
